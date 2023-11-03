@@ -59,17 +59,20 @@ export function capture<
   );
 }
 
+/* eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging */
+export interface FalseworkElement {
+  shadowRootInit?: ShadowRootInit;
+}
+
+/* eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging */
 export class FalseworkElement extends HTMLElement {
   [SHADOW_ROOT]: ShadowRoot;
 
-  // Allow subtypes to override shadow root options
-  get shadowRootInit(): ShadowRootInit {
-    return { mode: "closed" };
-  }
-
   constructor() {
     super();
-    this[SHADOW_ROOT] = this.attachShadow(this.shadowRootInit);
+    this[SHADOW_ROOT] = this.attachShadow(
+      this.shadowRootInit ?? { mode: "closed" },
+    );
   }
 
   // Automatic string tag
