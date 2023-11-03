@@ -133,40 +133,6 @@ class HelloWorld extends FalseworkElement {}
 Extending from `FalseworkElement` makes your class compatible with Ornament's
 decorators (like `@attr()`) and also provides the following additional features:
 
-#### Automagic custom element registration
-
-Classes that extend `FalseworkElement` are automatically registered as custom
-elements with a tag name derived from the class name:
-
-```javascript
-import { FalseworkElement } from "@sirpepe/falsework";
-
-// Automatically available as <camel-case>
-class CamelCase extends FalseworkElement {}
-
-// Automatically available as <snake-case>
-class snake_case extends FalseworkElement {}
-
-// Automatically available as <unholy-abomination-of-a-name>
-class __UNHOLY_AbominationOf_a_Name__ extends FalseworkElement {}
-```
-
-You can alternatively define a custom tag name via a static field:
-
-```javascript
-import { TAG_NAME } from "@sirpepe/falsework"; // symbol
-
-// Automatically available as <hello-world>
-class Whatever extends FalseworkElement {
-  static [TAG_NAME] = "hello-world";
-}
-```
-
-**Note for TypeScript:** you still need add your custom element's interface to
-`HTMLElementTagNameMap` to make it work with native DOM APIs. This kindof
-defeats the purpose of the automatically-derived tags, but there is currently no
-way around this IF you want to use TypeScript.
-
 #### Rendering
 
 Falsework by default bundles [uhtml](https://github.com/WebReflection/uhtml) for
@@ -189,11 +155,34 @@ export class HelloWorld extends FalseworkElement {
 }
 ```
 
+To customize the shadow root options on a per-class-basis, override the getter
+`shadowRootInit` on your classes:
+
+```javascript
+import { FalseworkElement } from "@sirpepe/falsework";
+
+export class HelloInput extends FalseworkElement {
+  get shadowRootInit() {
+    return { mode: "open", delegatesFocus: true };
+  }
+}
+```
+
+The default shadow root options are `{ mode: "closed" }`;
+
 #### Automagic String Tag
 
 ### Decorators
 
-#### Decorator `@capture(eventName, selector)`
+#### Decorator `@component(tagName?)`
+
+#### Decorator `@capture(eventNames, selector)`
+
+### Symbols
+
+#### `SHADOW_ROOT`
+
+Key for the shadow roots on `FalseworkElement` instances.
 
 ### Types
 
