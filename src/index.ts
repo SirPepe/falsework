@@ -50,14 +50,14 @@ export function capture<
   Selector extends string,
 >(
   this: unknown,
-  eventName: EventType,
+  eventNames: EventType,
   ...selectors: Selector[]
 ): CaptureDecorator<T, EventType, NonNullable<QueryResult<Selector>>> {
   return subscribe(
     function (this: FalseworkElement) {
       return this[SHADOW_ROOT];
     },
-    eventName,
+    eventNames,
     {
       capture: true,
       predicate: (evt) => selectors.some((s) => evt.target?.matches?.(s)),
