@@ -1,11 +1,5 @@
 import { html, render } from "uhtml";
-import {
-  debounce,
-  reactive,
-  subscribe,
-  enhance,
-  define,
-} from "@sirpepe/ornament";
+import { debounce, reactive, subscribe, define } from "@sirpepe/ornament";
 import type { Captured, QueryResult } from "./types.js";
 
 // Makes all of ornament available
