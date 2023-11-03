@@ -66,7 +66,17 @@ export function capture<
 }
 
 export class FalseworkElement extends HTMLElement {
-  [SHADOW_ROOT] = this.attachShadow({ mode: "closed" });
+  [SHADOW_ROOT]: ShadowRoot;
+
+  // Allow subtypes to override shadow root options
+  get shadowRootInit(): ShadowRootInit {
+    return { mode: "closed" };
+  }
+
+  constructor() {
+    super();
+    this[SHADOW_ROOT] = this.attachShadow(this.shadowRootInit);
+  }
 
   // Automatic string tag
   get [Symbol.toStringTag](): string {
