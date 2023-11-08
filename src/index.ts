@@ -48,9 +48,7 @@ export function capture<
   ...selectors: Selector[]
 ): CaptureDecorator<T, EventType, NonNullable<QueryResult<Selector>>> {
   return subscribe(
-    function (this: FalseworkElement) {
-      return this[SHADOW_ROOT];
-    },
+    (instance: FalseworkElement) => instance[SHADOW_ROOT],
     eventNames,
     {
       capture: true,

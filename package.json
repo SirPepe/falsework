@@ -71,6 +71,6 @@
     "uhtml": "^3.2.1"
   },
   "dependencies": {
-    "@sirpepe/ornament": "^0.0.17"
+    "@sirpepe/ornament": "^0.0.18"
   }
 }
